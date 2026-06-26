@@ -7,53 +7,44 @@
     "url": "git+https://github.com/qwdingyu/shared-frontend.git"
   },
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
+      "import": "./dist/src/index.js",
       "types": "./dist/index.d.ts"
     },
     "./utils": {
-      "import": "./dist/utils/index.js",
-      "require": "./dist/utils/index.cjs",
+      "import": "./dist/src/utils/index.js",
       "types": "./dist/utils/index.d.ts"
     },
     "./components": {
-      "import": "./dist/components/index.js",
-      "require": "./dist/components/index.cjs",
+      "import": "./dist/src/components/index.js",
       "types": "./dist/components/index.d.ts"
     },
     "./hooks": {
-      "import": "./dist/hooks/index.js",
-      "require": "./dist/hooks/index.cjs",
+      "import": "./dist/src/hooks/index.js",
       "types": "./dist/hooks/index.d.ts"
     },
     "./api": {
-      "import": "./dist/api/index.js",
-      "require": "./dist/api/index.cjs",
+      "import": "./dist/src/api/index.js",
       "types": "./dist/api/index.d.ts"
     },
     "./store": {
-      "import": "./dist/store/index.js",
-      "require": "./dist/store/index.cjs",
+      "import": "./dist/src/store/index.js",
       "types": "./dist/store/index.d.ts"
     },
     "./types": {
-      "import": "./dist/types/index.js",
-      "require": "./dist/types/index.cjs",
+      "import": "./dist/src/types/index.js",
       "types": "./dist/types/index.d.ts"
     },
     "./constants": {
-      "import": "./dist/constants/index.js",
-      "require": "./dist/constants/index.cjs",
+      "import": "./dist/src/constants/index.js",
       "types": "./dist/constants/index.d.ts"
     },
     "./enums": {
-      "import": "./dist/enums/index.js",
-      "require": "./dist/enums/index.cjs",
+      "import": "./dist/src/enums/index.js",
       "types": "./dist/enums/index.d.ts"
     },
     "./styles/*": "./dist/styles/*",

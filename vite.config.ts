@@ -58,7 +58,6 @@ export default defineConfig({
           "@microsoft/signalr": "signalR",
         },
         preserveModules: true,
-        preserveModulesRoot: "src",
         entryFileNames: "[name].js",
         chunkFileNames: "[name].js",
       },
