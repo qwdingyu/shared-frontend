@@ -35,3 +35,6 @@ export * from "./plugins";
 
 // 路由配置
 export * from "./router";
+
+// 框架入口：统一注册资源、组件库、store、router、权限、全局方法
+export { TFramework, type FrameworkOptions } from "./framework";

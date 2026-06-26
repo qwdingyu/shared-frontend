@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { getMySubscription, getMyResourceQuota, getPlanDisplayName, getPlanColor } from '@usethink/shared-frontend/api/subscription'
-import type { Subscription, ResourceQuota } from '@usethink/shared-frontend/api/subscription'
+import { getMySubscription, getMyResourceQuota, getPlanDisplayName, getPlanColor } from '../../api/subscription'
+import type { Subscription, ResourceQuota } from '../../api/subscription'
 
 interface Props {
   showQuota?: boolean

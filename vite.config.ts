@@ -1,17 +1,9 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import dts from "vite-plugin-dts";
 import { resolve } from "path";
 
 export default defineConfig({
-  plugins: [
-    vue(),
-    dts({
-      include: ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-      outDir: "dist",
-      rollupTypes: true,
-    }),
-  ],
+  plugins: [vue()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -20,7 +12,6 @@ export default defineConfig({
       fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
     },
     rollupOptions: {
-      // 外部化所有不应打包的依赖
       external: [
         "vue",
         "vue-router",
@@ -39,10 +30,16 @@ export default defineConfig({
         "@microsoft/signalr",
         "crypto-js",
         "nprogress",
+        "nprogress/css/nprogress.css",
         "qs",
         "sortablejs",
         "file-saver",
         "xlsx",
+        "@tmom/asyncRoutes",
+        "@iconify/vue",
+        "@iconify-json/ep",
+        "@iconify-json/ant-design",
+        "vue-virtual-scroller"
       ],
       output: {
         globals: {
@@ -60,14 +57,14 @@ export default defineConfig({
           "vue-i18n": "VueI18n",
           "@microsoft/signalr": "signalR",
         },
-        // 保留模块结构
         preserveModules: true,
         preserveModulesRoot: "src",
+        entryFileNames: "[name].js",
+        chunkFileNames: "[name].js",
       },
     },
     outDir: "dist",
-    sourcemap: true,
-    // 清空输出目录
+    sourcemap: false,
     emptyOutDir: true,
   },
   resolve: {
