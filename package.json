@@ -1,6 +1,6 @@
 {
   "name": "@usethink/shared-frontend",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "@usethink 前端共享库 — Vue 3 工具函数、组件、Hooks、类型与业务能力",
   "repository": {
     "type": "git",
