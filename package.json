@@ -27,7 +27,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && mkdir -p dist/src/styles && cp src/styles/*.less src/styles/*.css dist/src/styles/",
     "prepack": "pnpm run build",
     "dev": "vite build --watch",
     "typecheck": "tsc --noEmit",
