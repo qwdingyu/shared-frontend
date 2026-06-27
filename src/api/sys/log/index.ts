@@ -10,7 +10,7 @@ export default {
    * @returns
    */
   getWithPageFromFile: (query: API.PageParams) =>
-    http.get<API.TableListResult<API.SysLogResult>>('/api/SysLog/GetWithPage', query),
+    http.get<API.TableListResult<API.SysLogResult>>('/SysLog/GetWithPage', query),
 
   /**
    * 获取分页列表(数据库表中获取)
@@ -18,5 +18,8 @@ export default {
    * @returns
    */
   getWithPageFromDb: (query: API.PageParams) =>
-    http.get<API.TableListResult<API.SysLogResult>>('/api/SysLog/GetWithPageFromDb', query),
+    http.get<API.TableListResult<API.SysLogResult>>('/SysLog/GetWithPageFromDb', query),
 }
+
+// 兼容 preserveModules 目录导入：确保该模块作为目录时有 index.js 落盘
+export const __logIndexMarker = true

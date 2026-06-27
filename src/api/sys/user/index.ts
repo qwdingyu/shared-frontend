@@ -65,7 +65,7 @@ export default {
    */
   getInfo: () =>
     request<API.AdminUserInfo>({
-      url: '/api/SysUser/GetUserInfo',
+      url: '/SysUser/GetUserInfo',
       method: 'get',
     }),
 
@@ -75,7 +75,7 @@ export default {
    */
   permmenu: () =>
     request<API.PermMenu>({
-      url: '/api/SysUser/GetPermMenu',
+      url: '/SysUser/GetPermMenu',
       method: 'get',
     }),
 
@@ -110,3 +110,6 @@ export default {
    */
   getUserListWithCache: () => http.get<API.UserInfoCache[]>(`/SysUser/GetAllUserWithCache`),
 }
+
+// 兼容 preserveModules 目录导入：确保该模块作为目录时有 index.js 落盘
+export const __userIndexMarker = true

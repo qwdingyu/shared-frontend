@@ -67,6 +67,8 @@ export interface RunnerJob {
   errorMessage?: string;
   /** 是否有可下载结果 */
   hasResult?: boolean;
+  /** 安全下载令牌（仅提交时返回，用于 SSE/下载验证） */
+  downloadToken?: string;
 }
 
 /**
@@ -97,7 +99,7 @@ export interface SseEvent {
  * POST /api/runner/generate
  */
 export function generateRunner(request: RunnerGenerateRequest) {
-  return http.post<GenerateResponse>("/runner/generate", request, {
+  return http.post<GenerateResponse>("/api/runner/generate", request, {
     showSuccessMsg: false,
   });
 }
@@ -107,7 +109,7 @@ export function generateRunner(request: RunnerGenerateRequest) {
  * GET /api/runner/jobs
  */
 export function getRunnerJobs() {
-  return http.get<RunnerJob[]>("/runner/jobs");
+  return http.get<RunnerJob[]>("/api/runner/jobs");
 }
 
 /**
@@ -115,7 +117,7 @@ export function getRunnerJobs() {
  * GET /api/runner/jobs/{id}
  */
 export function getRunnerJobStatus(id: string) {
-  return http.get<RunnerJob>(`/runner/jobs/${id}`);
+  return http.get<RunnerJob>(`/api/runner/jobs/${id}`);
 }
 
 /**
@@ -123,53 +125,18 @@ export function getRunnerJobStatus(id: string) {
  * POST /api/runner/jobs/{id}/cancel
  */
 export function cancelRunnerJob(id: string) {
-  return http.post<{ status: string; message: string }>(`/runner/jobs/${id}/cancel`, {}, {
+  return http.post<{ status: string; message: string }>(`/api/runner/jobs/${id}/cancel`, {}, {
     showSuccessMsg: false,
   });
 }
 
 /**
- * 临时下载令牌响应
+ * 下载生成结果。
+ * 后端使用不可猜测的 jobId 作为一次性访问凭证。
+ * GET /api/runner/jobs/{id}/download
  */
-export interface DownloadTokenResponse {
-  token: string;
-  expiresIn: number;
-  message: string;
-}
-
-/**
- * 生成临时下载令牌
- * POST /api/runner/jobs/{id}/download-token
- * 需要 JWT 认证
- */
-export function generateDownloadToken(id: string) {
-  return http.post<DownloadTokenResponse>(`/runner/jobs/${id}/download-token`, {}, {
-    showSuccessMsg: false,
-  });
-}
-
-/**
- * 下载生成结果（使用临时令牌）
- * GET /api/runner/jobs/{id}/download?token={token}
- * @param id 任务 ID
- * @param token 临时下载令牌
- */
-export function downloadRunnerResultWithToken(id: string, token: string) {
-  window.open(`${baseApiUrl}/runner/jobs/${id}/download?token=${token}`, "_blank");
-}
-
-/**
- * 下载生成结果（自动获取令牌）
- * @param id 任务 ID
- */
-export async function downloadRunnerResult(id: string) {
-  try {
-    const result = await generateDownloadToken(id);
-    downloadRunnerResultWithToken(id, result.token);
-  } catch (error) {
-    // 令牌生成失败（如无权限、任务不存在等），错误信息已由后端返回
-    throw error;
-  }
+export function downloadRunnerResult(id: string) {
+  window.open(`${baseApiUrl}/api/runner/jobs/${id}/download`, "_blank");
 }
 
 /**
@@ -179,11 +146,12 @@ export async function downloadRunnerResult(id: string) {
  */
 export function createSseConnection(
   id: string,
+  _token: string,
   onMessage: (event: SseEvent) => void,
   onError: (error: Event) => void,
   onEnd: () => void,
 ): EventSource {
-  const es = new EventSource(`${baseApiUrl}/runner/jobs/${id}/sse`);
+  const es = new EventSource(`${baseApiUrl}/api/runner/jobs/${id}/sse`);
 
   es.onmessage = (e: MessageEvent) => {
     try {

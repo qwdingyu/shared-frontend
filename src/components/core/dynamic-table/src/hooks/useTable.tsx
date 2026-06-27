@@ -29,8 +29,7 @@ export function useTable(props?: Partial<DynamicTableProps>) {
       }
     },
     {
-      // useTable 的 props 参数是父组件传入的静态引用，不存在嵌套变化
-      // 此处不需要 deep:true，可消除无用深度比较的潜在递归风险
+      deep: true,
       flush: 'post',
     },
   )

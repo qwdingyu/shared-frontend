@@ -270,13 +270,11 @@ export function getZlTagList(
   instrumentName: string,
   options?: RequestOptions,
 ) {
-  return http
-    .get<{ tags: string[] }>(
-      `/ZLSimulator/instances/${instanceId}/tags`,
-      { instrumentName },
-      options,
-    )
-    .then(res => res.tags ?? []);
+  return http.get<string[]>(
+    `/ZLSimulator/instances/${instanceId}/tags`,
+    { instrumentName },
+    options,
+  );
 }
 
 /**
@@ -339,3 +337,6 @@ export function stopZlTagSimulation(
     { params: { instrumentName }, ...options },
   );
 }
+
+// 兼容 preserveModules 目录导入：确保该模块作为目录时有 index.js 落盘
+export const __zlSimulatorIndexMarker = true

@@ -14,7 +14,13 @@
 export * from "./http";
 export * from "./saveRefreshTime";
 
-// ============ 核心 API 模块 ============
+// Dashboard 运营看板
+export * from "./dashboard";
+
+// 响应处理工具
+export * from "./response";
+
+// ============ 核心 API 模块 ==========
 // 设备管理（所有系统必须）
 export * from "./device";
 
@@ -24,7 +30,7 @@ export * from "./iotSim";
 // 登录认证（所有系统必须）
 export * from "./login";
 
-// ============ 可选 API 模块（仅 TMom.Api 完整版） ============
+// ============ 可选 API 模块（仅 TMom.Api 完整版） ==========
 // 基础数据管理
 export * from "./base";
 
@@ -51,3 +57,6 @@ export * from "./values";
 
 // 缓存管理
 export * from "./cache";
+
+// 确保该入口模块在 preserveModules 输出中落盘，避免消费方把目录当成文件导入
+export const __apiIndexMarker = true

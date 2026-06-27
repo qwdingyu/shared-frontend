@@ -232,6 +232,6 @@ export const useTabsViewStore = defineStore(
 );
 
 // 在组件setup函数外使用
-export function useTabsViewStoreWithOut(): ReturnType<typeof useTabsViewStore> {
+export function useTabsViewStoreWithOut() {
   return useTabsViewStore(store);
 }

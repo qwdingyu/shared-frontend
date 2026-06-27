@@ -98,9 +98,6 @@ export function useTablePlugin(props: tablePluginType) {
     selectedRowKeys: [] as number[],
     selectedRows: [] as any[],
     onChange: (selectedRowKeys: number[], selectedRows) => {
-      if (rowSelection.value.selectedRowKeys.length === selectedRowKeys.length) {
-        return
-      }
       rowSelection.value.selectedRowKeys = selectedRowKeys
       rowSelection.value.selectedRows = selectedRows
     },

@@ -3,7 +3,7 @@
  * @param {string='zh-cn' | 'en'} lang 返回中文的信息还是英文的
  * @constructor
  */
-export default function BrowserType(lang: 'zh-cn' | 'en' = 'en') {
+export function BrowserType(lang: 'zh-cn' | 'en' = 'en') {
   // 权重：系统 + 系统版本 > 平台 > 内核 + 载体 + 内核版本 + 载体版本 > 外壳 + 外壳版本
   const ua = navigator.userAgent.toLowerCase()
   const testUa = regexp => regexp.test(ua)
@@ -140,3 +140,5 @@ export default function BrowserType(lang: 'zh-cn' | 'en' = 'en') {
     ),
   }[lang]
 }
+
+export default BrowserType

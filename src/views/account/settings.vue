@@ -1,17 +1,16 @@
 <template>
-  <div class="settings-page">
-    个人设置
+  <div class="account-settings">
+    <a-card title="账户设置">
+      <p>账户设置页面</p>
+    </a-card>
   </div>
 </template>
 
 <script setup lang="ts">
-// 占位组件：个人设置页面
 </script>
 
 <style scoped>
-.settings-page {
-  padding: 20px;
-  text-align: center;
-  color: #999;
+.account-settings {
+  padding: 24px;
 }
 </style>

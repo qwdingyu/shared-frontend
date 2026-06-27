@@ -14,15 +14,15 @@ export default defineComponent({
       <>
         <a-layout-footer class={styles.page_footer}>
           <div class={styles.page_footer_link}>
-            <a href="https://gitee.com/UseThink/IotWeb" target="_blank">
+            <a href="https://gitee.com/thgao/tmom" target="_blank">
               在线预览
             </a>
-            <a href="https://gitee.com/UseThink/IotWeb" target="_blank">
+            <a href="https://gitee.com/thgao/tmom" target="_blank">
               <GithubOutlined />
             </a>
           </div>
           <div class={styles.copyright}>
-            Copyright <CopyrightOutlined /> 2026 UseThink All Rights Reserved
+            Copyright <CopyrightOutlined /> 2024 yefeng
           </div>
         </a-layout-footer>
       </>

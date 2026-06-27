@@ -23,3 +23,6 @@ export * from './modules/locale'
 export * from './modules/lockscreen'
 export * from './modules/tabsView'
 export * from './modules/user'
+
+// 兼容 preserveModules 目录导入：确保该模块作为目录时有 index.js 落盘
+export const __storeIndexMarker = true

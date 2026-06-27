@@ -2,8 +2,8 @@ import { RouterView, type RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: 'https://gitee.com/UseThink/IotWeb',
-    name: 'https://gitee.com/UseThink/IotWeb',
+    path: 'https://gitee.com/thgao/tmom',
+    name: 'https://gitee.com/thgao/tmom',
     component: RouterView,
     meta: {
       title: '代码仓库',

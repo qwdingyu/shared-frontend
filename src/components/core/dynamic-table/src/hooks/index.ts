@@ -8,3 +8,6 @@ export * from './useColumns'
 export * from './useEditable'
 export * from './useScroll'
 export * from './useTablePlugin'
+
+// 兼容 preserveModules 目录导入：确保该模块作为目录时有 index.js 落盘
+export const __hooksIndexMarker = true

@@ -57,8 +57,6 @@ export interface IotDeviceDto {
 export interface IotTagDto {
   id?: number;
   biz_tag_name: string;
-  bizTagName?: string;
-  tagName?: string;
   device_id?: number;
   group_id?: number;
   tag_name?: string;
@@ -330,14 +328,6 @@ export function deleteIotTag(id: number) {
  */
 export function batchAddIotTags(tags: Partial<IotTagDto>[]) {
   return http.post("/IotDevice/BatchAddTags", tags.map(stripIdForCreate));
-}
-
-/**
- * 一次创建向导结束，提交设备+标签（原子操作，对应后端 /AddWithTags）
- * 标签数组中的 device_id 可为空或占位值，后端会自动填充
- */
-export function createDeviceWithTags(data: Record<string, unknown>) {
-  return http.post("/IotDevice/AddWithTags", data);
 }
 
 /**

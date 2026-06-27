@@ -1,51 +1,3 @@
-:root {
-  --think-bg-page: #f5f5f5;
-  --think-bg-container: #fff;
-  --think-bg-elevated: #fafafa;
-  --think-bg-hover: #f5f5f5;
-  --think-bg-active: #e6f4ff;
-  --think-bg-warning: #fffbe6;
-  --think-bg-table-header: #fafafa;
-  --think-bg-table-body: #fff;
-  --think-text-primary: #262626;
-  --think-text-secondary: #595959;
-  --think-text-tertiary: #8c8c8c;
-  --think-text-disabled: #bfbfbf;
-  --think-text-table-header: #262626;
-  --think-text-table-body: #262626;
-  --think-border: #f0f0f0;
-  --think-border-secondary: #d9d9d9;
-  --think-primary: #1890ff;
-  --think-primary-hover: #1677ff;
-  --think-link: #1890ff;
-  --think-success: #52c41a;
-  --think-warning: #faad14;
-  --think-error: #ff4d4f;
-  --think-purple: #722ed1;
-}
-
-html.dark {
-  --think-bg-page: #141414;
-  --think-bg-container: #141414;
-  --think-bg-elevated: #1f1f1f;
-  --think-bg-hover: #262626;
-  --think-bg-active: #111b26;
-  --think-bg-warning: #2b2611;
-  --think-bg-table-header: #1f1f1f;
-  --think-bg-table-body: #141414;
-  --think-text-primary: #e8e8e8;
-  --think-text-secondary: #888;
-  --think-text-tertiary: #666;
-  --think-text-disabled: #555;
-  --think-text-table-header: #f0f0f0;
-  --think-text-table-body: #e8e8e8;
-  --think-border: #303030;
-  --think-border-secondary: #303030;
-  --think-primary: #177ddc;
-  --think-primary-hover: #69b1ff;
-  --think-link: #69b1ff;
-}
-
 .ant-col {
   width: 100%;
 }
@@ -67,337 +19,136 @@ body {
 }
 
 // ============================================================
-// 全局表格修复 — 消除 fixed 列阴影竖条
-// ============================================================
-.ant-table-container::before,
-.ant-table-container::after {
-  display: none !important;
-}
-.ant-table-has-fix-left .ant-table-container::before,
-.ant-table-has-fix-right .ant-table-container::after {
-  display: block !important;
-  box-shadow: none !important;
-  background: transparent !important;
-}
-
-// ============================================================
-// 表格铺满高度 — 空数据时表格主体区域也有可见高度
-// ============================================================
-
-// 全局：table body 至少有 150px 高度，空列表时不让表头贴在底部
-.ant-table-body {
-  min-height: 150px;
-}
-
-// 主页面表格铺满视口：页面根容器 + a-card 均使用 flex 撑满
-// 用法：在页面根 <div> 或 <template> 上添加 class="table-fill-page"
-.table-fill-page {
-  --think-table-body-min-height: 360px;
-
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 64px); // 减去全局 header 高度
-  overflow: hidden;
-
-  > .ant-card,
-  > .ant-card-bordered {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-
-    > .ant-card-body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
-      overflow: hidden;
-      padding-bottom: 0;
-
-      // 表格撑满剩余空间
-      .ant-table-wrapper {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        min-height: 0;
-
-        .ant-spin-nested-loading,
-        .ant-spin-container {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          min-height: 0;
-        }
-
-        .ant-table {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          min-height: 0;
-
-          .ant-table-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-height: 0;
-
-            .ant-table-body {
-              flex: 1;
-              min-height: var(--think-table-body-min-height);
-              max-height: none !important;
-              overflow-y: auto !important;
-            }
-
-            .ant-table-header {
-              flex-shrink: 0;
-            }
-          }
-        }
-
-        .ant-pagination {
-          flex-shrink: 0;
-          margin-bottom: 8px;
-        }
-      }
-    }
-  }
-}
-
-// 普通页面表格：仅铺满主数据表，不影响多个并列表格/弹窗中的局部表格
-.table-fill-page .page-main-table {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-
-  .ant-table-wrapper {
-    flex: 1;
-  }
-}
-
-// Tab 内嵌 + table-fill-page：减去更多头部空间
-.table-fill-page.tab-inside {
-  height: calc(100vh - 160px); // 减去 header + tab header + padding
-}
-
-// ============================================================
-// 全局暗色主题适配 — 所有颜色必须引用 --think-* 语义变量
+// 全局暗色主题适配 — Ant Design Vue 组件暗色覆盖
+// 提取自各页面重复的 :global(html.dark) 样式块
 // ============================================================
 html.dark {
-  // Card
+  // Card 暗色
   .ant-card {
-    border-color: var(--think-border) !important;
-    background: var(--think-bg-container) !important;
+    border-color: #303030 !important;
+    background: #141414 !important;
   }
   .ant-card-head-title,
   .ant-card-extra,
   .ant-card-body {
-    color: var(--think-text-primary) !important;
+    color: #e8e8e8 !important;
   }
 
-  // Table
+  // Table 暗色
   .ant-table,
   .ant-table-container,
   .ant-table-content {
-    background: var(--think-bg-table-body) !important;
-    color: var(--think-text-table-body) !important;
+    background: #141414 !important;
+    color: #e8e8e8 !important;
   }
   .ant-table-thead > tr > th {
-    background: var(--think-bg-table-header) !important;
-    color: var(--think-text-table-header) !important;
-    border-color: var(--think-border) !important;
+    background: #1f1f1f !important;
+    color: #f0f0f0 !important;
+    border-color: #303030 !important;
   }
   .ant-table-tbody > tr > td {
-    background: var(--think-bg-table-body) !important;
-    border-color: var(--think-border) !important;
-    color: var(--think-text-table-body) !important;
+    background: #141414 !important;
+    border-color: #303030 !important;
+    color: #e8e8e8 !important;
   }
   .ant-table-tbody > tr:hover > td {
-    background: var(--think-bg-elevated) !important;
+    background: #1f1f1f !important;
   }
   .ant-table-cell::before {
-    background: var(--think-border) !important;
+    background: #303030 !important;
   }
-  .ant-table-has-fix-left .ant-table-container::before,
-  .ant-table-has-fix-right .ant-table-container::after,
   .ant-table-container::before,
   .ant-table-container::after {
-    background: transparent !important;
+    background: #303030 !important;
   }
   .ant-table-cell-fix-left,
   .ant-table-cell-fix-right,
   .ant-table-fixed-left,
-  .ant-table-fixed-right,
-  .ant-table-placeholder .ant-table-cell {
-    background: var(--think-bg-table-body) !important;
+  .ant-table-fixed-right {
+    background: #141414 !important;
   }
   .ant-table-placeholder .ant-table-cell {
-    color: var(--think-text-secondary) !important;
+    background: #141414 !important;
+    color: #888 !important;
   }
 
-  // Pagination
+  // Pagination 暗色
   .ant-pagination {
-    color: var(--think-text-primary);
+    color: #e8e8e8;
   }
-  .ant-pagination-item,
-  .ant-pagination-prev .ant-pagination-item-link,
-  .ant-pagination-next .ant-pagination-item-link {
-    background: var(--think-bg-elevated) !important;
-    border-color: var(--think-border) !important;
-    color: var(--think-text-primary) !important;
+  .ant-pagination-item {
+    background: #1f1f1f !important;
+    border-color: #303030 !important;
   }
   .ant-pagination-item a {
-    color: var(--think-text-primary) !important;
+    color: #e8e8e8 !important;
   }
   .ant-pagination-item-active {
-    background: var(--think-primary) !important;
-    border-color: var(--think-primary) !important;
+    background: #177ddc !important;
+    border-color: #177ddc !important;
   }
   .ant-pagination-item-active a {
     color: #fff !important;
   }
-
-  // Modal / Drawer / Popover / Dropdown elevated surfaces
-  .ant-modal-content,
-  .ant-modal-header,
-  .ant-drawer-header,
-  .ant-dropdown-menu,
-  .ant-popover-inner,
-  .ant-select-dropdown,
-  .ant-picker-dropdown .ant-picker-panel-container {
-    background: var(--think-bg-elevated) !important;
-    color: var(--think-text-primary) !important;
-  }
-  .ant-modal-header,
-  .ant-modal-footer,
-  .ant-drawer-header,
-  .ant-popover-title,
-  .ant-select-dropdown,
-  .ant-picker-dropdown .ant-picker-panel-container {
-    border-color: var(--think-border) !important;
-  }
-  .ant-modal-title,
-  .ant-drawer-title,
-  .ant-popover-title {
-    color: var(--think-text-table-header) !important;
-  }
-  .ant-drawer-content {
-    background: var(--think-bg-page) !important;
-  }
-  .ant-popover-inner-content,
-  .ant-dropdown-menu-item {
-    color: var(--think-text-primary) !important;
-  }
-  .ant-dropdown-menu-item:hover {
-    background: var(--think-bg-hover) !important;
+  .ant-pagination-prev .ant-pagination-item-link,
+  .ant-pagination-next .ant-pagination-item-link {
+    background: #1f1f1f !important;
+    border-color: #303030 !important;
+    color: #e8e8e8 !important;
   }
 
-  // Form / Button / Input
-  .ant-form-item-label > label,
-  .ant-radio-wrapper,
-  .ant-select-item,
-  .ant-picker-cell,
-  .ant-picker-header,
-  .ant-picker-content th {
-    color: var(--think-text-primary) !important;
+  // Modal 暗色
+  .ant-modal-content {
+    background: #1f1f1f !important;
+    color: #e8e8e8 !important;
   }
-  .ant-btn-default,
-  .ant-btn-dashed,
+  .ant-modal-header {
+    background: #1f1f1f !important;
+    border-color: #303030 !important;
+  }
+  .ant-modal-title {
+    color: #f0f0f0 !important;
+  }
+  .ant-modal-footer {
+    border-color: #303030 !important;
+  }
+
+  // Form 暗色
+  .ant-form-item-label > label {
+    color: #e8e8e8;
+  }
+
+  // Input / Select 暗色
   .ant-input,
-  .ant-input-affix-wrapper,
-  .ant-input-number,
-  .ant-input-number-input,
   .ant-select-selector,
-  .ant-picker,
-  .ant-radio-inner {
-    background: var(--think-bg-elevated) !important;
-    border-color: var(--think-border) !important;
-    color: var(--think-text-primary) !important;
-  }
-  .ant-btn-default:not(:disabled):hover,
-  .ant-btn-dashed:not(:disabled):hover,
-  .ant-btn-ghost:not(:disabled):hover,
-  .ant-input:hover,
-  .ant-input:focus,
-  .ant-input-affix-wrapper:hover,
-  .ant-input-affix-wrapper-focused,
-  .ant-input-number:hover,
-  .ant-input-number-focused,
-  .ant-select:not(.ant-select-disabled):hover .ant-select-selector,
-  .ant-select-focused .ant-select-selector,
-  .ant-picker:hover,
-  .ant-picker-focused {
-    background: var(--think-bg-hover) !important;
-    border-color: var(--think-primary) !important;
-    color: var(--think-link) !important;
-  }
-  .ant-btn-link:not(:disabled):hover {
-    background: transparent !important;
-    color: var(--think-link) !important;
-  }
-  .ant-input::placeholder,
-  .ant-select-selection-placeholder,
-  .ant-picker-input > input::placeholder {
-    color: var(--think-text-disabled) !important;
-  }
-  .ant-select-selection-item,
-  .ant-picker-input > input,
-  .ant-input-number-input,
-  .ant-picker-cell-inner,
-  .ant-picker-header button {
-    color: inherit !important;
-  }
-  .ant-select-item-option-active:not(.ant-select-item-option-disabled),
-  .ant-picker-cell-in-view:hover .ant-picker-cell-inner,
-  .ant-picker-time-panel-column > li.ant-picker-time-panel-cell .ant-picker-time-panel-cell-inner:hover {
-    background: var(--think-bg-hover) !important;
-    color: var(--think-text-primary) !important;
-  }
-  .ant-select-item-option-selected:not(.ant-select-item-option-disabled),
-  .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
-  .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
-  .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
-    background: var(--think-primary) !important;
-    color: #fff !important;
+  .ant-picker {
+    background: #1f1f1f !important;
+    border-color: #303030 !important;
+    color: #e8e8e8 !important;
   }
 
-  // Components
+  // Tabs 暗色
   .ant-tabs-tab {
-    color: var(--think-text-tertiary) !important;
+    color: #999 !important;
   }
-  .ant-tabs-tab-active .ant-tabs-tab-btn,
-  .ant-breadcrumb a:hover {
-    color: var(--think-primary) !important;
+  .ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #177ddc !important;
   }
-  .ant-empty-description,
-  .ant-steps-item-description,
-  .ant-breadcrumb a,
-  .ant-breadcrumb-separator {
-    color: var(--think-text-secondary) !important;
+
+  // Drawer 暗色
+  .ant-drawer-content {
+    background: #141414 !important;
   }
-  .ant-alert,
-  .ant-collapse-content,
-  .ant-tag,
-  .ant-tooltip-inner {
-    background: var(--think-bg-elevated) !important;
-    border-color: var(--think-border) !important;
-    color: var(--think-text-primary) !important;
+  .ant-drawer-header {
+    background: #1f1f1f !important;
+    border-color: #303030 !important;
   }
-  .ant-alert-message,
-  .ant-collapse-header,
-  .ant-steps-item-title,
-  .ant-progress-text {
-    color: var(--think-text-primary) !important;
+  .ant-drawer-title {
+    color: #f0f0f0 !important;
   }
-  .ant-collapse {
-    background: var(--think-bg-page) !important;
-    border-color: var(--think-border) !important;
-  }
-  .ant-spin-dot-item,
-  .ant-switch-checked {
-    background-color: var(--think-primary) !important;
-  }
-  .ant-switch {
-    background: var(--think-text-disabled) !important;
+
+  // Empty 暗色
+  .ant-empty-description {
+    color: #888 !important;
   }
 }

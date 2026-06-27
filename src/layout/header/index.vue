@@ -18,7 +18,7 @@
     </div>
     <div class="header-right">
       <Space :size="20">
-        <!-- <GithubOutlined @click="goGitee" /> -->
+        <GithubOutlined @click="goGitee" />
         <Search />
         <Tooltip :title="$t('layout.header.tooltipLock')" placement="bottom">
           <LockOutlined @click="lockscreenStore.setLock(true)" />
@@ -111,7 +111,7 @@
   const avatar = computed(() =>
     userInfo.value.avatar ? `${import.meta.env.VITE_BASE_STATIC_URL}${userInfo.value.avatar}` : '',
   )
-//   const goGitee = () => window.open('https://gitee.com/UseThink/IotWeb', '_blank')
+  const goGitee = () => window.open('https://gitee.com/thgao/tmom', '_blank')
 
   const handleUserMenuSelect = ({ key }: { key: string }) => {
     if (key === 'settings') {

@@ -4,7 +4,8 @@
  */
 
 export * from "./awaitTo";
-export * from "./browser-type";
+export { default as BrowserType } from "./browser-type";
+export { default } from "./browser-type";
 export * from "./common";
 export * from "./component";
 export * from "./dateUtil";
@@ -31,3 +32,6 @@ export * from "./urlUtils";
 export * from "./uuid";
 export * from "./validate";
 export * from "./format";
+
+// 兼容 preserveModules 目录导入：确保该模块作为目录时有 index.js 落盘
+export const __utilsIndexMarker = true

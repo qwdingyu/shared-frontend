@@ -85,13 +85,12 @@ export const useTableState = ({ props, slots }: UseTableStateParams) => {
     const props = unref(getProps)
     // 2024-02-28 表格列的多语言
     const _cols = columnsRef.value.length != props.columns.length ? columnsRef.value : props.columns
-    // 先转换多语言再过滤。必须 clone 再修改，避免污染原始 reactive column 对象从而触发 deep watch 无限递归
     const columns = _cols
+      // 先转换多语言再过滤
       .map(column => {
-        const col = { ...column }
-        if (isNil(col?.ignoreI18n) || !col?.ignoreI18n)
-          col.title = i18nRender(col.dataIndex, col.i18n, col.title) as string
-        return col
+        if (isNil(column?.ignoreI18n) || !column?.ignoreI18n)
+          column.title = i18nRender(column.dataIndex, column.i18n, column.title) as string
+        return column
       })
       .filter(n => !n.hideInTable) as TableColumn<any>[]
 
@@ -140,8 +139,7 @@ export const useTableState = ({ props, slots }: UseTableStateParams) => {
     },
     {
       immediate: true,
-      // 此处不需要 deep:true，列对象的嵌套属性由 useColumns 的 watchEffect + cloneDeep 独立处理
-      // 开启 deep 会导致无用且潜在的高开销深度比较
+      deep: true,
     },
   )
 

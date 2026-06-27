@@ -1,17 +1,19 @@
 <template>
   <div class="login-page">
-    登录页面
+    <a-card title="登录">
+      <p>登录页面</p>
+    </a-card>
   </div>
 </template>
 
 <script setup lang="ts">
-// 占位组件：登录页面
 </script>
 
 <style scoped>
 .login-page {
-  padding: 20px;
-  text-align: center;
-  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 </style>

@@ -216,3 +216,6 @@ export function formatPrice(price: number | null, currency: string = 'CNY'): str
   const symbol = symbols[currency] || currency
   return `${symbol}${price.toFixed(2)}`
 }
+
+// 兼容 preserveModules 目录导入：确保该模块作为目录时有 index.js 落盘
+export const __subscriptionIndexMarker = true

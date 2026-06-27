@@ -12,10 +12,10 @@ export const createStorage = ({ prefixKey = '', storage = localStorage } = {}) =
    * @class Storage
    */
   const Storage = class {
-    public storage = storage
-    public prefixKey?: string = prefixKey
+    private storage = storage
+    private prefixKey?: string = prefixKey
 
-    public getKey(key: string) {
+    private getKey(key: string) {
       return `${this.prefixKey}${key}`.toUpperCase()
     }
 

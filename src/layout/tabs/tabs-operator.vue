@@ -124,6 +124,32 @@ const openPageFile = async () => {
   }
 };
 
+const handleMenuSelect = ({ key }: { key: string }) => {
+  switch (key) {
+    case "1":
+      reloadPage();
+      break;
+    case "2":
+      removeTab();
+      break;
+    case "3":
+      closeLeft();
+      break;
+    case "4":
+      closeRight();
+      break;
+    case "5":
+      closeOther();
+      break;
+    case "6":
+      closeAll();
+      break;
+    case "7":
+      openPageFile();
+      break;
+  }
+};
+
 defineExpose({
   removeTab,
 });
@@ -139,40 +165,39 @@ defineExpose({
       <TitleI18n :title="tabItem.meta?.title" />
     </div>
     <template #overlay>
-      <a-menu style="user-select: none">
+      <a-menu style="user-select: none" @select="handleMenuSelect">
         <a-menu-item
           key="1"
           :disabled="activeKey !== tabItem.fullPath"
-          @click="reloadPage"
         >
           <reload-outlined />
           {{ $t("layout.multipleTab.reload") }}
         </a-menu-item>
-        <a-menu-item key="2" @click="removeTab">
+        <a-menu-item key="2">
           <close-outlined />
           {{ $t("layout.multipleTab.close") }}
         </a-menu-item>
         <a-menu-divider />
-        <a-menu-item key="3" @click="closeLeft">
+        <a-menu-item key="3">
           <vertical-right-outlined />
           {{ $t("layout.multipleTab.closeLeft") }}
         </a-menu-item>
-        <a-menu-item key="4" @click="closeRight">
+        <a-menu-item key="4">
           <vertical-left-outlined />
           {{ $t("layout.multipleTab.closeRight") }}
         </a-menu-item>
         <a-menu-divider />
-        <a-menu-item key="5" @click="closeOther">
+        <a-menu-item key="5">
           <column-width-outlined />
           {{ $t("layout.multipleTab.closeOther") }}
         </a-menu-item>
-        <a-menu-item key="6" @click="closeAll">
+        <a-menu-item key="6">
           <minus-outlined />
           {{ $t("layout.multipleTab.closeAll") }}
         </a-menu-item>
         <template v-if="isDevMode">
           <a-menu-divider />
-          <a-menu-item key="7" @click="openPageFile">
+          <a-menu-item key="7">
             <column-width-outlined />
             打开页面文件
           </a-menu-item>
